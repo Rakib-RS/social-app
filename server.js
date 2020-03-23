@@ -5,6 +5,7 @@ const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 const bodyparser = require('body-parser');
+const passport = require('passport');
 
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
@@ -23,9 +24,12 @@ mongoose
 .catch(err => console.log(err)
 )
 const ref = mongoose.Collection;
-app.get('/',(req,res)=>
-    res.send("hello server 11111 12")
-)
+//passport middleware
+app.use(passport.initialize());
+
+//passport config
+require('./configure/passport')(passport)
+
 app.use('/api/users',users);
 app.use('/api/profile',profile);
 app.use('/api/posts/',posts);
