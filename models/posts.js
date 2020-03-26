@@ -40,11 +40,15 @@ const PostShcema = new Schema({
       avatar: {
         type: String
       },
-      date: Date,
-      default: Date.now
+      date: {
+        type: Date,
+        default: Date.now
+      }
     }
   ],
-  date: Date,
-  default: Date.now
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
-module.exports = Posts = mongoose.model('posts',PostShcema);
+module.exports = Posts = mongoose.model("posts", PostShcema);
