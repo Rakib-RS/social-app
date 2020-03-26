@@ -214,4 +214,63 @@ router.post(
   }
 );
 
+
+//@router  delete api/profile/experience
+  //@desc delete education
+  //@access private
+
+  router.delete(
+    "/experience/:exp_id",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      Profile.findOne({user:req.user.id})
+              .then(profile =>{
+                //get remove index
+                const removIndex = profile.experience
+                  .map(item => item.id)
+                  .indexOf(req.params.exp_id);
+                
+                  //splice out of array
+
+                  profile.experience.splice(removIndex,1);
+
+                  //save
+                  profile.save().then(profile => res.json(profile));
+
+
+              })
+              .catch(error => res.json(error));
+              
+    }
+  );
+
+  //@router  delete api/profile/education/edu_id
+  //@desc delete education
+  //@access private
+
+  router.delete(
+    "/education/:edu_id",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      Profile.findOne({user:req.user.id})
+              .then(profile =>{
+                //get remove index
+                const removIndex = profile.education
+                  .map(item => item.id)
+                  .indexOf(req.params.exp_id);
+                
+                  //splice out of array
+
+                  profile.education.splice(removIndex,1);
+
+                  //save
+                  profile.save().then(profile => res.json(profile));
+
+
+              })
+              .catch(error => res.json(error));
+              
+    }
+  );
+
 module.exports = router;
