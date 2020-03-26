@@ -29,6 +29,62 @@ router.get(
   }
 );
 
+
+//@route post api/profile/handle/:handle
+//@desc return proifle by handle
+//@@ access public
+router.get('/handle/:handle',(req,res)=>{
+  Profile.findOne({handle:req.params.handle})
+          .populate('user',['name','avatar'])
+          .then(profile =>{
+            if(!profile){
+              const errors ={};
+              errors.noprofile = 'no profile exist';
+              return res.status(404).json(errors);
+            }
+            return res.json(profile);
+          })
+          .catch( error => console.log(error));
+})
+
+//@route post api/profile/user/:user_id
+//@desc return proifle by user_id
+//@@ access public
+router.get('/user/:user_id',(req,res)=>{
+  Profile.findOne({user: req.params.user_id})
+          .populate('user',['name','avatar'])
+          .then(profile =>{
+            if(!profile){
+              const errors ={};
+              errors.noprofile = 'no profile exist';
+              return res.status(404).json(errors);
+            }
+            return res.json(profile);
+          })
+          .catch( error => res.status(404).json({profile: 'there are no profile for the user'}));
+})
+
+
+//@route post api/profile/all
+//@desc return all proifle
+//@@ access public
+router.get('/all',(req,res)=>{
+  Profile.find()
+          .populate('user',['name','avatar'])
+          .then(profile =>{
+            if(!profile){
+              const errors ={};
+              errors.noprofile = 'no profile exist';
+              return res.status(404).json(errors);
+            }
+            return res.json(profile);
+          })
+          .catch( error => res.status(404).json({profile: 'there is no profile for the user'}));
+})
+
+
+
+
 //@route post api/profile/
 //@desc create or edit user profile
 //@@ access private
