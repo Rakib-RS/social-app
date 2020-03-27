@@ -64,6 +64,56 @@ router.delete('/:id',passport.authenticate('jwt',{session:false}),(req,res) =>{
                 .catch(err => res.status(404).json({nopost:'no post'}))
         })
         .catch(err  => res.json(err));
-})
+});
+
+//@route post api/posts/like/:id
+//@desc Like post
+//@@ access private
+router.post('/like/:id',passport.authenticate('jwt',{session:false}),(req,res) =>{
+    Profile.findOne({user: req.user.id})
+        .then(profile => {
+            Post.findById(req.params.id)
+                .then(post =>{
+                    if(post.likes.filter(like => like.user.toString() === req.user.id).length> 0){
+                        return res.status(400).json({alreadyliked:'User already liked the post'});
+                    }
+                    //add user id to like array
+                    post.likes.unshift({user: req.user.id});
+                    post.save().then(post => res.json(post));
+                })
+                .catch(err => res.status(404).json({nopost:'no post'}))
+        })
+        .catch(err  => res.json(err));
+});
+
+
+//@route post api/posts/unlike/:id
+//@desc unLike post
+//@@ access private
+router.post('/unlike/:id',passport.authenticate('jwt',{session:false}),(req,res) =>{
+    Profile.findOne({user: req.user.id})
+        .then(profile => {
+            Post.findById(req.params.id)
+                .then(post =>{
+                    if(post.likes.filter(like => like.user.toString() === req.user.id).length === 0){
+                        return res.status(400).json({noliked:'you have not yet liked the post'});
+                    }
+                    //Get remove the index
+                    const removeIndex = post.likes
+                    .map(item => item.user.toString())
+                    .indexOf(req.user.id)
+
+                    //splice out array
+                    post.likes.splice(removeIndex,1);
+
+                    //Save
+                    post.save().then(post => res.json(post));
+
+                })
+                .catch(err => res.status(404).json({nopost:'no post'}))
+        })
+        .catch(err  => res.json(err));
+});
+
 
 module.exports = router;
