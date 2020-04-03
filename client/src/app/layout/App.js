@@ -6,6 +6,9 @@ import Landing from "./Landing";
 import "./App.css";
 import { Container} from "semantic-ui-react";
 import {Route} from  'react-router-dom'
+import SignUp from "../../features/Register/SignUp";
+
+import LoginForm from "../../features/SignIn/SignIn";
 
 class App extends Component {
   render() {
@@ -14,6 +17,8 @@ class App extends Component {
         <NavBar />
         <Container className="main">
           <Route exact path='/' component={Landing}/>
+          <Route exact path='/register' component={SignUp}/>
+          <Route exact path='/login' component={LoginForm}/>
           <Footer />
         </Container>
       </Fragment>
