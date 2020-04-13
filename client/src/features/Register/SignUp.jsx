@@ -32,6 +32,7 @@ class SignUp extends Component {
     if(nextProps.errors){
       this.setState({errors:nextProps.errors});
     }
+    
   }
   onSubmit(e) {
     e.preventDefault();
@@ -48,7 +49,6 @@ class SignUp extends Component {
   
   render() {
     const { name, email, password, password2, errors } = this.state;
-    const {user} = this.props.auth;
 
     return (
       <div className="register">
@@ -56,8 +56,7 @@ class SignUp extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="text-center">Sign In</h1>
-              {user ? user.name: null}
-
+            
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
