@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 
 const mapStatetoProps =(state)=>({
   auth: state.auth,
-  errors:state.errors
+  errors:state.errors,
+  login:state.login
 })
 
 
@@ -27,6 +28,11 @@ class SignUp extends Component {
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+  componentDidMount(){
+    if(this.props.login.isAuthenticated){
+      this.props.history.push('/dashboard');
+    }
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.errors){
