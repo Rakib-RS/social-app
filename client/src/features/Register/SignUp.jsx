@@ -61,7 +61,7 @@ class SignUp extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="text-center">Sign In</h1>
+              <h1 className="text-center">Sign Up</h1>
             
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">

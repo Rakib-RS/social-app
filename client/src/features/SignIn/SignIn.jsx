@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import classnames from "classnames";
+
 import { connect } from "react-redux";
-import {loginUser} from '../../app/actions/authAction';
-import PropTypes from 'prop-types';
+import { loginUser } from "../../app/actions/authAction";
+import PropTypes from "prop-types";
+import TextFiledGroupInput from "../../app/common/form/TextFiledGroupInput";
 
 class SignIn extends Component {
   constructor() {
@@ -24,19 +25,19 @@ class SignIn extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    this.props.loginUser(user)
+    this.props.loginUser(user);
   }
-  componentDidMount(){
-    if(this.props.login.isAuthenticated){
-      this.props.history.push('/dashboard');
+  componentDidMount() {
+    if (this.props.login.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
   }
-  componentWillReceiveProps(nextProps){
-    if(nextProps.errors){
-      this.setState({errors:nextProps.errors})
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
-    if(nextProps.login.isAuthenticated){
-      this.props.history.push('/dashboard');
+    if (nextProps.login.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
   }
 
@@ -50,34 +51,23 @@ class SignIn extends Component {
               <h1 className="text-center">Sign In</h1>
 
               <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    className={classnames("form-control form-control-lg ", {
-                      "is-invalid": errors.email,
-                    })}
-                    placeholder="Enter Email Address"
-                    name="email"
-                    onChange={this.onChange}
-                    value={email}
-                  />
-                  {errors.email && (
-                    <div className="invalid-feedback">{errors.email} </div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className={classnames("form-control form-control-lg ", {
-                      "is-invalid": errors.password,
-                    })}
-                    placeholder="enter password"
-                    name="password"
-                    value={password}
-                    onChange={this.onChange}
-                  />
-                  {errors.password && <div className='invalid-feedback'>{errors.password}</div>}
-                </div>
+                <TextFiledGroupInput
+                  type="email"
+                  placeholder="Enter Email Address"
+                  name="email"
+                  onChange={this.onChange}
+                  value={email}
+                  error={errors.email}
+                />
+                <TextFiledGroupInput
+                  type="password"
+                  placeholder="Enter your password"
+                  name="password"
+                  onChange={this.onChange}
+                  value={password}
+                  error={errors.password}
+                />
+
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
@@ -87,13 +77,13 @@ class SignIn extends Component {
     );
   }
 }
-SignIn.propTypes ={
-  loginUser:PropTypes.func.isRequired,
-  login:PropTypes.object.isRequired,
-  errors:PropTypes.object.isRequired
-}
-const maptoState = (state) =>({
-  login:state.login, 
-  errors:state.errors
-})
-export default connect(maptoState,{loginUser}) (SignIn);
+SignIn.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  login: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const maptoState = (state) => ({
+  login: state.login,
+  errors: state.errors,
+});
+export default connect(maptoState, { loginUser })(SignIn);
