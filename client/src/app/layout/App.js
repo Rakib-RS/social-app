@@ -9,6 +9,8 @@ import {Route} from  'react-router-dom'
 import SignUp from "../../features/Register/SignUp";
 
 import LoginForm from "../../features/SignIn/SignIn";
+import Dashboard from "../../features/DashBoard/Dashboard";
+
 
 class App extends Component {
   render() {
@@ -19,6 +21,7 @@ class App extends Component {
           <Route exact path='/' component={Landing}/>
           <Route exact path='/register' component={SignUp}/>
           <Route exact path='/login' component={LoginForm}/>
+          <Route exact path='/dashboard' component={Dashboard}/>
           <Footer />
         </Container>
       </Fragment>

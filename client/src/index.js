@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import configureStore from './app/store/configureStore';
 import setAuthToken from "./app/utilis/setAuthToken";
 import { setCurrentUser, logoutUser } from "./app/actions/authAction";
+import {clearProfile} from './app/actions/profileAction'
 import jwt_decode from 'jwt-decode'
 const rootEl = document.getElementById("root");
 
@@ -24,6 +25,7 @@ if(localStorage.jwtToken){
   const currentTime = Date.now()/1000;
   if(decoded.exp < currentTime){
     store.dispatch(logoutUser());
+    store.dispatch(clearProfile());
     //clean current user
     //redirect to login
     window.location.href = '/login';
