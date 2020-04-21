@@ -1,16 +1,14 @@
 import React from "react";
 import classnames from "classnames";
 
-const TextFiledGroupInput = ({
-  name,
-  type,
-  placeholder,
-  onChange,
-  value,
-  error,
-}) => {
+const InputGroup = ({ name, placeholder, onChange, value, error,icon,type }) => {
   return (
-    <div className="form-group">
+    <div className="input-group mb-3">
+      <div className='input-group-prepend'>
+        <span className='input-group-text'>
+          <i className={icon}/>
+        </span>
+      </div>
       <input
         type={type}
         className={classnames("form-control form-control-lg ", {
@@ -26,4 +24,4 @@ const TextFiledGroupInput = ({
   );
 };
 
-export default TextFiledGroupInput;
+export default InputGroup;

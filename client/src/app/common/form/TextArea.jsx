@@ -1,18 +1,10 @@
 import React from "react";
 import classnames from "classnames";
 
-const TextFiledGroupInput = ({
-  name,
-  type,
-  placeholder,
-  onChange,
-  value,
-  error,
-}) => {
+const TextArea = ({ name, placeholder, onChange, value, error }) => {
   return (
     <div className="form-group">
-      <input
-        type={type}
+      <textarea
         className={classnames("form-control form-control-lg ", {
           "is-invalid": error,
         })}
@@ -26,4 +18,4 @@ const TextFiledGroupInput = ({
   );
 };
 
-export default TextFiledGroupInput;
+export default TextArea;

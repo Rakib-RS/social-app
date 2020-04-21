@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../app/actions/profileAction";
-import PropTypes, { object } from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 class Dashboard extends Component {

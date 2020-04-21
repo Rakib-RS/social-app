@@ -1,18 +1,15 @@
 import React from "react";
 import classnames from "classnames";
 
-const TextFiledGroupInput = ({
-  name,
-  type,
-  placeholder,
-  onChange,
-  value,
-  error,
-}) => {
+const SelectList = ({ name, placeholder, onChange, value, error, options }) => {
+  const selectOptions = options.map((option) => (
+    <option key={option.label} value={option.value}>
+      {option.label}
+    </option>
+  ));
   return (
     <div className="form-group">
-      <input
-        type={type}
+      <select
         className={classnames("form-control form-control-lg ", {
           "is-invalid": error,
         })}
@@ -20,10 +17,13 @@ const TextFiledGroupInput = ({
         name={name}
         onChange={onChange}
         value={value}
-      />
+      >
+        {selectOptions}
+      </select>
+
       {error && <div className="invalid-feedback">{error} </div>}
     </div>
   );
 };
 
-export default TextFiledGroupInput;
+export default SelectList;
