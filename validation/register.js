@@ -13,13 +13,13 @@ module.exports =  function validateRegisterInput(data){
         errors.name = 'name must be between 2 and 30 characters'
     }
     if(validator.isEmpty(data.name)){
-        errors.name = 'name field is required'
+        errors.name = 'Name field is required'
     }
     if(validator.isEmpty(data.email)){
         errors.email = 'email field is required'
     }
     if(!validator.isEmail(data.email)){
-        errors.email = 'email is invalid'
+        errors.email = 'Email is invalid'
     }
     if(validator.isEmpty(data.password)){
         errors.password = 'password field is required'
