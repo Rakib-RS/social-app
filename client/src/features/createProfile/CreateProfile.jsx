@@ -5,6 +5,8 @@ import TextFiledGroupInput from "../../app/common/form/TextFiledGroupInput";
 import SelectList from "../../app/common/form/SelectList";
 import TextArea from "../../app/common/form/TextArea";
 import InputGroup from "../../app/common/form/InputGroup";
+import {createProfile} from '../../app/actions/profileAction';
+import {withRouter} from 'react-router-dom'
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -28,9 +30,30 @@ class CreateProfile extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.errors){
+      this.setState({errors:nextProps.errors});
+    }
+  }
   onSubmit(e) {
     e.preventDefault();
-    console.log("submit");
+    const profileData ={
+      handle:this.state.handle,
+      company: this.state.company,
+      website: this.state.website,
+      status: this.state.status,
+      location: this.state.location,
+      skills: this.state.skills,
+      githubusername: this.state.githubusername,
+      bio: this.state.bio,
+      twitter: this.state.twitter,
+      facebook: this.state.facebook,
+      linkedin: this.state.linkedin,
+      youtube: this.state.youtube,
+
+    };
+    this.props.createProfile(profileData,this.props.history);
+  
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -159,6 +182,7 @@ class CreateProfile extends Component {
                 <div className="mb-3">
                   <button
                     className="btn btn-light"
+                    type='button'
                     onClick={() => {
                       this.setState((preState) => ({
                         displaySocialInput: !preState.displaySocialInput,
@@ -187,4 +211,4 @@ const maptoStateProps = (state) => ({
   profile: state.profile,
   errors: state.errors,
 });
-export default connect(maptoStateProps)(CreateProfile);
+export default connect(maptoStateProps,{createProfile})(withRouter(CreateProfile));
