@@ -13,7 +13,7 @@ class AddExperience extends Component {
       title: "",
       location: "",
       from: "",
-      to: "",
+      to: null,
       current: false,
       description: "",
       errors: {},
