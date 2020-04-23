@@ -4,7 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import TextFiledGroupInput from "../../app/common/form/TextFiledGroupInput";
 import TextArea from "../../app/common/form/TextArea";
-import { text } from "body-parser";
+import {addExperience} from '../../app/actions/profileAction'
 class AddExperience extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +25,16 @@ class AddExperience extends Component {
   }
   onSubmit(e){
       e.preventDefault();
+      const addExp ={
+          company:this.state.company,
+          title:this.state.title,
+          location:this.state.location,
+          from:this.state.from,
+          to:this.state.to,
+          current:this.state.current,
+          description:this.state.description
+      }
+      this.props.addExperience(addExp,this.props.history);
   }
   onChange(e){
       this.setState({[e.target.name]:e.target.value})
@@ -34,6 +44,13 @@ class AddExperience extends Component {
           disabled:!this.state.disabled,
           current:!this.state.current
       })
+  }
+  componentWillReceiveProps(nextProps){
+      if(nextProps.errors){
+          this.setState({
+              errors:nextProps.errors
+          })
+      }
   }
   render() {
     const {
@@ -154,4 +171,4 @@ const maptoStateProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(maptoStateProps)(withRouter(AddExperience));
+export default connect(maptoStateProps,{addExperience})(withRouter(AddExperience));
