@@ -5,8 +5,9 @@ import TextFiledGroupInput from "../../app/common/form/TextFiledGroupInput";
 import SelectList from "../../app/common/form/SelectList";
 import TextArea from "../../app/common/form/TextArea";
 import InputGroup from "../../app/common/form/InputGroup";
-import { createProfile } from "../../app/actions/profileAction";
+import { createProfile,getCurrentProfile } from "../../app/actions/profileAction";
 import { withRouter } from "react-router-dom";
+import isEmpty from "../../app/validation/is-empty";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -30,9 +31,41 @@ class CreateProfile extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  componentDidMount(){
+      this.props.getCurrentProfile();
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+    }
+    if(nextProps.profile.profile){
+        const profile = nextProps.profile.profile;
+        const skillsCSV = profile.skills.join(',');
+        profile.company = !isEmpty(profile.company) ? profile.company : '';
+        profile.location = !isEmpty(profile.location) ? profile.location : '';
+        profile.website = !isEmpty(profile.website) ? profile.website : '';
+        profile.githubusername = !isEmpty(profile.githubusername) ? profile.githubusername : '';
+        profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
+        profile.social = !isEmpty(profile.social) ? profile.social :{};
+        profile.facebook = !isEmpty(profile.social.facebook) ? profile.social.facebook : '';
+        profile.youtube = !isEmpty(profile.social.youtube) ? profile.social.youtube : '';
+        profile.linkedin = !isEmpty(profile.social.linkedin) ? profile.social.linkedin : '';
+
+        this.setState({
+            handle:profile.handle,
+            status:profile.status,
+            company:profile.company,
+            website:profile.website,
+            location:profile.location,
+            skills:skillsCSV,
+            githubusername:profile.githubusername,
+            bio:profile.bio,
+            facebook:profile.facebook,
+            youtube:profile.youtube,
+            linkedin:profile.linkedin
+        })
+
+
     }
   }
   onSubmit(e) {
@@ -116,7 +149,7 @@ class CreateProfile extends Component {
         <div className="conatiner">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">create your profile</h1>
+              <h1 className="display-4 text-center">update  your profile</h1>
               <p className="lead text-center">let's get some information</p>
               <small className="d-block pb-3">* = required fileds</small>
               <form onSubmit={this.onSubmit}>
@@ -136,21 +169,21 @@ class CreateProfile extends Component {
                   error={errors.status}
                 />
                 <TextFiledGroupInput
-                  placeholder="* company"
+                  placeholder="company"
                   name="company"
                   value={company}
                   onChange={this.onChange}
                   error={errors.company}
                 />
                 <TextFiledGroupInput
-                  placeholder="* website"
+                  placeholder=" website"
                   name="website"
                   value={website}
                   onChange={this.onChange}
                   error={errors.website}
                 />
                 <TextFiledGroupInput
-                  placeholder="* location"
+                  placeholder="location"
                   name="location"
                   value={location}
                   onChange={this.onChange}
@@ -164,7 +197,7 @@ class CreateProfile extends Component {
                   error={errors.skills}
                 />
                 <TextFiledGroupInput
-                  placeholder="* githubusername"
+                  placeholder="githubusername"
                   name="githubusername"
                   value={githubusername}
                   onChange={this.onChange}
@@ -209,6 +242,6 @@ const maptoStateProps = (state) => ({
   profile: state.profile,
   errors: state.errors,
 });
-export default connect(maptoStateProps, { createProfile })(
+export default connect(maptoStateProps, { createProfile ,getCurrentProfile})(
   withRouter(CreateProfile)
 );

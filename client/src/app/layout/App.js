@@ -12,6 +12,7 @@ import LoginForm from "../../features/SignIn/SignIn";
 import Dashboard from "../../features/DashBoard/Dashboard";
 import PrivateRoute from "../common/privateRoute";
 import CreateProfile from "../../features/createProfile/CreateProfile";
+import EditProfile from '../../features/editProfile/EditProfile';
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path ='/create-profile' component={CreateProfile}/>
+            <PrivateRoute exact path ='/edit-profile' component={EditProfile}/>
           </Switch>
 
           <Footer />

@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getCurrentProfile } from "../../app/actions/profileAction";
+import { getCurrentProfile,deleteAccount } from "../../app/actions/profileAction";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import ProfileActions from "./ProfileActions";
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
+  }
+  onDeleteClick(e){
+    this.props.deleteAccount();
   }
   render() {
     const { user } = this.props.login;
@@ -23,7 +27,20 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashBoardContent = (
           <div>
-            todo :<h1>Profile Dashboard</h1>
+            <p className="lead text-muted">
+              Welcome
+              <Link to={`/profile/${profile.handle}`}>
+                {} {user.name}
+              </Link>
+            </p>
+            <ProfileActions />
+            <div style={{ marginBottom: "60px" }} />
+            <button
+              onClick={this.onDeleteClick.bind(this)}
+              className="btn btn-danger"
+            >
+              Delete My Account
+            </button>
           </div>
         );
       } else {
@@ -61,4 +78,4 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
 };
-export default connect(maptoStateProps, { getCurrentProfile })(Dashboard);
+export default connect(maptoStateProps, { getCurrentProfile,deleteAccount })(Dashboard);
