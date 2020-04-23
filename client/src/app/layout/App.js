@@ -13,6 +13,7 @@ import Dashboard from "../../features/DashBoard/Dashboard";
 import PrivateRoute from "../common/privateRoute";
 import CreateProfile from "../../features/createProfile/CreateProfile";
 import EditProfile from '../../features/editProfile/EditProfile';
+import AddExperience from "../../features/addExperience/AddExperience";
 
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path ='/create-profile' component={CreateProfile}/>
             <PrivateRoute exact path ='/edit-profile' component={EditProfile}/>
+            <PrivateRoute exact path ='/add-experience' component={AddExperience}/>
           </Switch>
 
           <Footer />

@@ -8,6 +8,7 @@ const TextFiledGroupInput = ({
   onChange,
   value,
   error,
+  disabled
 }) => {
   return (
     <div className="form-group">
@@ -20,6 +21,7 @@ const TextFiledGroupInput = ({
         name={name}
         onChange={onChange}
         value={value}
+        disabled={disabled}
       />
       {error && <div className="invalid-feedback">{error} </div>}
     </div>
