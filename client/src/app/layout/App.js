@@ -15,6 +15,7 @@ import CreateProfile from "../../features/createProfile/CreateProfile";
 import EditProfile from '../../features/editProfile/EditProfile';
 import AddExperience from "../../features/addExperience/AddExperience";
 import AddEducation from "../../features/addEducation/AddEducation";
+import Profiles from "../../features/profiles/Profiles";
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={SignUp} />
           <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/profiles" component={Profiles} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path ='/create-profile' component={CreateProfile}/>
