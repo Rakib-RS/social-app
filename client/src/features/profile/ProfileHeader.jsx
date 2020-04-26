@@ -5,7 +5,6 @@ class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
     return (
-      <div className="container">
         <div className="row">
           <div className="col-md-12">
             <div className="card card-body bg-info text-white mb-3">
@@ -65,9 +64,8 @@ class ProfileHeader extends Component {
             </div>
           </div>
         </div>
-      </div>
+     
     );
   }
 }
 export default ProfileHeader;
-

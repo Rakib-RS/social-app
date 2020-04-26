@@ -120,6 +120,7 @@ class CreateProfile extends Component {
           <InputGroup
             placeholder="Facebook URL"
             name="facebook"
+            type='url'
             value={facebook}
             onChange={this.onChange}
             icon="fab fa-facebook"
@@ -128,6 +129,7 @@ class CreateProfile extends Component {
           <InputGroup
             placeholder="youtube URL"
             name="youtube"
+            type='url'
             value={youtube}
             onChange={this.onChange}
             icon="fab fa-youtube"
@@ -136,6 +138,7 @@ class CreateProfile extends Component {
           <InputGroup
             placeholder="linkedin URL"
             name="linkedin"
+            type='url'
             value={linkedin}
             onChange={this.onChange}
             icon="fab fa-linkedin"

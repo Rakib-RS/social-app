@@ -13,7 +13,7 @@ class AddEducation extends Component {
       degree: "",
       fieldofstudy: "",
       from: "",
-      to: "",
+      to: null,
       current: false,
       description: "",
       errors: {},
