@@ -17,6 +17,7 @@ import AddExperience from "../../features/addExperience/AddExperience";
 import AddEducation from "../../features/addEducation/AddEducation";
 import Profiles from "../../features/profiles/Profiles";
 import profile from "../../features/profile/profile";
+import NotFound from "../../features/notFound/NotFound";
 
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/profiles" component={Profiles} />
           <Route exact path="/profile/:handle" component={profile} />
+          <Route exact path="/profile/not-found" component={NotFound} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path ='/create-profile' component={CreateProfile}/>
