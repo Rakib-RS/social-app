@@ -26,6 +26,7 @@ class post extends Component {
           <div className="row">
             <div className="col-md-12">
               <PostForm />
+              {postContent}
             </div>
           </div>
          </div>

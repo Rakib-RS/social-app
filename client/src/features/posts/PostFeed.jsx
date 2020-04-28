@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 
 class PostFeed extends Component {
     render() {
+        const {posts} = this.props;
         return (
-            <div>
-                
-            </div>
+            posts.map(post => <PostItem key={post._id} post={post}/>)
         )
     }
 }
