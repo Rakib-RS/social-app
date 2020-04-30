@@ -19,6 +19,7 @@ import Profiles from "../../features/profiles/Profiles";
 import profile from "../../features/profile/profile";
 import NotFound from "../../features/notFound/NotFound";
 import post from "../../features/posts/post";
+import Post from "../../features/post/Post";
 
 
 class App extends Component {
@@ -40,6 +41,7 @@ class App extends Component {
             <PrivateRoute exact path ='/add-experience' component={AddExperience}/>
             <PrivateRoute exact path ='/add-education' component={AddEducation}/>
             <PrivateRoute exact path ='/feed' component={post}/>
+            <PrivateRoute exact path ='/post/:id' component={Post}/>
           </Switch>
 
           <Footer />
