@@ -52,7 +52,7 @@ router.post(
 );
 //@route delete api/posts/:id
 //@desc get post
-//@@ access public
+//@@ access private
 router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),

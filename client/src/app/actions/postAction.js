@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_ERRORS,GET_POST,GET_POSTS,ADD_POST, PROFILE_LOADING} from './types'
+import {GET_ERRORS,GET_POST,GET_POSTS,ADD_POST, PROFILE_LOADING, DELETE_POST} from './types'
 
 //Add post 
 
@@ -33,6 +33,40 @@ export const getPosts = () => dispatch =>{
 
 
 }
+//delte post
+
+export const deletePost = (id) => dispatch=>{
+    axios
+        .delete(`/api/posts/${id}`)
+        .then(res => dispatch({
+            type:DELETE_POST,
+            payload:id
+        }))
+        .catch(err => dispatch({
+            type:GET_ERRORS,
+            payload:err.response.data
+        }))
+}
+export const addlike = (id) => dispatch=>{
+    axios
+        .post(`/api/posts/like/${id}`)
+        .then(res => dispatch(getPosts()))
+        .catch(err => dispatch({
+            type:GET_ERRORS,
+            payload:err.response.data
+        }))
+}
+export const removelike = (id) => dispatch=>{
+    axios
+        .post(`/api/posts/unlike/${id}`)
+        .then(res => dispatch(getPosts()))
+        .catch(err => dispatch({
+            type:GET_ERRORS,
+            payload:err.response.data
+        }))
+}
+
+
 
 export const setProfileLoadig = () =>{
     return {

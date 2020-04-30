@@ -15,7 +15,7 @@ import {addPost} from '../../app/actions/postAction';
      }
      onSubmit(e){
          e.preventDefault();
-        const {user} = this.props.auth;
+        const {user} = this.props.login;
        const newPost ={
             text:this.state.text,
             name: user.name,
@@ -69,6 +69,6 @@ import {addPost} from '../../app/actions/postAction';
 
 const maptoState = (state)=>({
     errors:state.errors,
-    auth:state.auth
+    login:state.login
 })
 export default connect(maptoState,{addPost}) (PostForm);
