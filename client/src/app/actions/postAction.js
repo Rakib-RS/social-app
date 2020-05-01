@@ -1,9 +1,10 @@
 import axios from 'axios';
-import {GET_ERRORS,GET_POST,GET_POSTS,ADD_POST, PROFILE_LOADING, DELETE_POST} from './types'
+import {GET_ERRORS,GET_POST,GET_POSTS,ADD_POST, PROFILE_LOADING, DELETE_POST, CLEAR_ERROR} from './types'
 
 //Add post 
 
 export const addPost = (postData) => dispatch=>{
+    dispatch(clearErrors());
     axios
         .post('/api/posts',postData)
         .then(res => dispatch({
@@ -82,6 +83,7 @@ export const removelike = (id) => dispatch=>{
 }
 
 export const addComment = (id,commentData) => dispatch=>{
+    dispatch(clearErrors());
     axios
         .post(`/api/posts/comment/${id}`,commentData)
         .then(res => dispatch({
@@ -94,9 +96,28 @@ export const addComment = (id,commentData) => dispatch=>{
         }))
 }
 
+//delete a comment
+
+export const deleteComment = (postId,commentId) => dispatch=>{
+    axios
+        .delete(`/api/posts/comment/${postId}/${commentId}`)
+        .then(res => dispatch({
+            type:GET_POST,
+            payload:res.data
+        }))
+        .catch(err => dispatch({
+            type:GET_ERRORS,
+            payload:err.response.data
+        }))
+}
 
 export const setProfileLoadig = () =>{
     return {
         type:PROFILE_LOADING
+    }
+}
+export const clearErrors =() =>{
+    return {
+        type:CLEAR_ERROR
     }
 }
