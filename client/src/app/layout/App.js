@@ -33,7 +33,6 @@ class App extends Component {
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/profiles" component={Profiles} />
           <Route exact path="/profile/:handle" component={profile} />
-          <Route exact path="/profile/not-found" component={NotFound} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path ='/create-profile' component={CreateProfile}/>
@@ -43,6 +42,7 @@ class App extends Component {
             <PrivateRoute exact path ='/feed' component={post}/>
             <PrivateRoute exact path ='/post/:id' component={Post}/>
           </Switch>
+          <Route exact path="/not-found" component={NotFound} />
 
           <Footer />
         </Container>

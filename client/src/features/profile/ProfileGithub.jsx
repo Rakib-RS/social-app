@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import isEmpty from "../../app/validation/is-empty";
 
 class ProfileGithub extends Component {
   constructor(props) {
@@ -28,7 +29,10 @@ class ProfileGithub extends Component {
   }
   render() {
     const { repos } = this.state;
-    const repoItems = repos.map((repo) => (
+    let repoItems;
+    console.log(repos.length);
+    if(Array.isArray(repos) && repos.length){
+    repoItems = repos.map((repo) => (
       <div key={repo.id} className="card card-body mb-2">
         <div className="row">
           <div className="col-md-6">
@@ -52,11 +56,16 @@ class ProfileGithub extends Component {
           </div>
         </div>
       </div>
-    ));
+    ))}
     return (
       <div ref="myref">
         <h3 className="mb-4">Latest Github Repos:</h3>
-        {repoItems}
+        {isEmpty(repoItems)? "sorry not found, check your githubusername,is it correct or not ":(<span>
+          
+          {repoItems}
+          </span>
+        )}
+        
       </div>
     );
   }
