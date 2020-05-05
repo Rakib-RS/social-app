@@ -6,6 +6,7 @@ import ProfileAbout from "./ProfileAbout";
 import ProfileCreds from "./ProfileCreds";
 import { Link } from "react-router-dom";
 import ProfileGithub from "./ProfileGithub";
+import PropTypes from 'prop-types';
 
 class profile extends Component {
   componentDidMount() {
@@ -52,6 +53,10 @@ class profile extends Component {
     );
   }
 }
+profile.propTypes = {
+  getProfileByHandle: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
+};
 const maptoState = (state) => ({
   profile: state.profile,
 });
